@@ -18,11 +18,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+//"<RecyclerViewPokemonAdapter.ViewHolder>"는 사용하려는 ViewHolder 기입
 public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerViewPokemonAdapter.ViewHolder> {
 
-    private List<Integer> data;
+    private List<Pokemon> data;
 
-    public RecyclerViewPokemonAdapter(List<Integer> data) {
+    public RecyclerViewPokemonAdapter(List<Pokemon> data) {
 
         this.data = data;
 
@@ -41,13 +42,14 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
     @Override
     public void onBindViewHolder(@NonNull @NotNull RecyclerViewPokemonAdapter.ViewHolder holder, int position) {
 
-        int id = data.get(position);
+        Pokemon pokemon = data.get(position);
 
         //아래의 setText의 매개변수는 String 타입이 들어가야 하므로 만약 toString을 해주지 않으면 타입 불일치로 Exception 발생
-        holder.textViewId.setText(id + "번");
+        holder.textViewId.setText(pokemon.getId() + "번");
+        holder.textViewName.setText(pokemon.getName());
         holder.textViewId.setTag(position);
 
-        Util.loadImageOn("https://pokeres.bastionbot.org/images/pokemon/" + id + ".png", holder.imageViewPokemon);
+        Util.loadImageOn(pokemon.getImgUrl(), holder.imageViewPokemon);
 
     }
 
@@ -60,12 +62,14 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
     static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView textViewId;
+        public TextView textViewName;
         public ImageView imageViewPokemon;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
             textViewId = itemView.findViewById(R.id.item_pokemon__textViewId);
+            textViewName = itemView.findViewById(R.id.item_pokemon__textViewName);
             imageViewPokemon = itemView.findViewById(R.id.item_pokemon__imageViewPokemon);
 
         }
