@@ -2,6 +2,7 @@ package com.example.a20210605_recyclerview;
 
 import android.app.Application;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.util.TypedValue;
 import android.widget.ImageView;
 
@@ -16,6 +17,10 @@ public class Util {
     public static void init(Application application) {
         Util.application = application;
 
+    }
+
+    public static void log(String msg) {
+        Log.d("AA1", msg);
     }
 
     public static float dipToPixels(float borderRadius) {

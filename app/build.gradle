@@ -13,6 +13,8 @@ android {
         versionCode 1
         versionName "1.0"
 
+        multiDexEnabled true
+
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -50,9 +52,26 @@ dependencies {
     // 스테토
     implementation 'com.facebook.stetho:stetho:1.5.1'
     implementation 'com.facebook.stetho:stetho-js-rhino:1.5.1'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.1'
 
     // 글라이드
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+
+    // HTTP 통신 라이브러리
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+
+    // 외부 API로 받은 데이터를 처리하는 라이브러리, rxjava
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+
+    // retrofit 에서 rxjava를 사용하기 위한 라이브러리
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+
+    // retrofit 에서 jackson를 사용하기 위한 라이브러리
+    implementation 'com.squareup.retrofit2:converter-jackson:2.9.0'
+
+    // 멀티덱스
+    def multidex_version = "2.0.1"
+    implementation "androidx.multidex:multidex:$multidex_version"
 
 }
