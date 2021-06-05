@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     //리사이클러 뷰 생성
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/activity_main__recyclerViewPokemon"
         android:layout_width="match_parent"

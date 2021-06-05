@@ -8,6 +8,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerViewPokemonAdapter.ViewHolder> {
@@ -21,41 +24,41 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     @NonNull
-    @org.jetbrains.annotations.NotNull
+    @NotNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull @org.jetbrains.annotations.NotNull ViewGroup parent, int viewType) {
+    public RecyclerViewPokemonAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pokemon, parent, false);
 
-        return new ViewHolder(view);
+        return new RecyclerViewPokemonAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull @org.jetbrains.annotations.NotNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull RecyclerViewPokemonAdapter.ViewHolder holder, int position) {
 
-        //setText는 String 값을 매개변수로 받기 때문에 "data.get(position)"에다가 " + "번"" 해주면 전체적으로 String 값이 된다.
-        holder.textViewId.setText(data.get(position) + "번");
-        holder.textViewId.setText(position);
+        //아래의 setText의 매개변수는 String 타입이 들어가야 하므로 만약 toString을 해주지 않으면 타입 불일치로 Exception 발생
+        holder.textViewId.setText(data.get(position).toString() + "번");
+        holder.textViewId.setTag(position);
+
 
     }
 
     @Override
     public int getItemCount() {
+
         return data.size();
     }
 
-
-
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         public TextView textViewId;
 
-        public ViewHolder(@NonNull @org.jetbrains.annotations.NotNull View itemView) {
+        public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
             textViewId = itemView.findViewById(R.id.item_pokemon__textViewId);
+
         }
     }
-
 
 }

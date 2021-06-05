@@ -1,6 +1,7 @@
 package com.example.a20210605_recyclerview;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,14 +16,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final List<Integer> data = new ArrayList<>();
-        for (int i = 0; i <= 100; i++) {
+        List<Integer> data = new ArrayList<>();
 
-            data.add(i);
-
-        }
+        data.add(1);
+        data.add(2);
+        data.add(3);
 
         RecyclerView recyclerViewPokemon = findViewById(R.id.activity_main__recyclerViewPokemon);
         recyclerViewPokemon.setAdapter(new RecyclerViewPokemonAdapter(data));
+
+
     }
 }
