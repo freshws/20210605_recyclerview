@@ -1,11 +1,12 @@
 package com.example.a20210605_recyclerview;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,8 +15,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView imageView = findViewById(R.id.activity_main__imageViewTop);
-        Glide.with(this).load("http://goo.gl/gEgYUd").into(imageView);
+        final List<Integer> data = new ArrayList<>();
+        for (int i = 0; i <= 100; i++) {
 
+            data.add(i);
+
+        }
+
+        RecyclerView recyclerViewPokemon = findViewById(R.id.activity_main__recyclerViewPokemon);
+        recyclerViewPokemon.setAdapter(new RecyclerViewPokemonAdapter(data));
     }
 }

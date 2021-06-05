@@ -7,12 +7,14 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-  <ImageView
-      android:id="@+id/activity_main__imageViewTop"
-      android:layout_width="300dp"
-      android:layout_height="300dp"
-      android:layout_gravity="center"
-      android:background="@color/black"/>
+    //리사이클러 뷰 생성
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/activity_main__recyclerViewPokemon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="100"
+        tools:listitem="@layout/item_pokemon" />
 
 
 </LinearLayout>
