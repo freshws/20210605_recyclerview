@@ -1,6 +1,7 @@
 package com.example.a20210605_recyclerview;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,17 +27,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        RecyclerView recyclerViewPokemon = findViewById(R.id.activity_main__recyclerViewPokemon);
+        final RecyclerView recyclerViewPokemon = findViewById(R.id.activity_main__recyclerViewPokemon);
 
-        PokemonService pokemonService = new PokemonService();
+        final PokemonService pokemonService = new PokemonService();
 
-        //인터넷 통신을 통해 API와 PokeApi__getPokemons__ResponseBody 간에 짝이 맞는 변수? 내용? 을 가져온다.
-        //가져온 내용은 responseBody에 들어가게 됨.
-        //PokeApi__getPokemons__ResponseBody가 API 내용을 받을 수 있게 변수명을 동일하게 만들어져있다.
-        pokemonService.getPokemons(responseBody -> {
+        final RecyclerViewPokemonAdapter recyclerViewPokemonAdapter = new RecyclerViewPokemonAdapter();
+        recyclerViewPokemon.setAdapter(recyclerViewPokemonAdapter);
 
-            //★responseBody의 객체를 생성하지 않았는데 responseBody.getResults() 메소드를 호출하는 원리를 모르겠음
-            recyclerViewPokemon.setAdapter(new RecyclerViewPokemonAdapter(responseBody.getResults()));
+        //"더 보기" 버튼이 클릭 되었을 때 통신이 발생하고 리스트가 뿌려지도록 변경
+        recyclerViewPokemonAdapter.setOnclickLoadMore(v -> {
+
+            pokemonService.getPokemons(responseBody -> {
+
+                recyclerViewPokemonAdapter.addPokemons(responseBody.getResults());
+            });
 
         });
 

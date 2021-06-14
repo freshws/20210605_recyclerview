@@ -4,15 +4,12 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
+    <Button
+        android:id="@+id/item_pokemon__footer__buttonLoadMore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Footer"
-        android:textSize="20sp"
-        android:gravity="center_horizontal"
-        android:padding="10sp"/>
-
-
+        android:text="더 보기"
+        android:textSize="20sp" />
 
 
 </LinearLayout>

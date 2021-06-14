@@ -3,6 +3,7 @@ package com.example.a20210605_recyclerview;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //ItemView는 HeaderView, ItemView, FooterView로 총 3개가 되었기 때문에 커스텀 ViewHolder는 사용하지 못하고 일반적인 RecyclerView Holder를 사용해야함.
@@ -23,6 +25,13 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
 
 
     private List<Pokemon> data;
+    private View.OnClickListener onclickLoadMore;
+
+    public RecyclerViewPokemonAdapter() {
+
+        this.data = new ArrayList<>();
+
+    }
 
     public RecyclerViewPokemonAdapter(List<Pokemon> data) {
 
@@ -65,6 +74,8 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
 
         } else if (holder instanceof FooterViewHolder) {
 
+            FooterViewHolder footerViewHolder = (FooterViewHolder) holder;
+
         } else {
 
             //ViewHolder 클래스 이름을 ItemViewHolder라고 변경 했기 때문에...
@@ -92,7 +103,26 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
         return data.size() + 2;
     }
 
-    static class ItemViewHolder extends RecyclerView.ViewHolder {
+    public void addPokemons(List<Pokemon> pokemons) {
+
+        for (Pokemon pokemon : pokemons) {
+
+            data.add(pokemon);
+
+        }
+
+        //데이터가 갱신됐다고 자동으로 refresh 되지 않기 때문에 notifyDataSetChanged(); 메소드 사용
+        notifyDataSetChanged();
+
+    }
+
+    public void setOnclickLoadMore(View.OnClickListener onclickLoadMore) {
+
+        this.onclickLoadMore = onclickLoadMore;
+
+    }
+
+    class ItemViewHolder extends RecyclerView.ViewHolder {
 
         public TextView textViewId;
         public TextView textViewName;
@@ -109,7 +139,7 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     //HeaderViewHolder, FooterViewHolder 각각 만들어 준다.
-    static class HeaderViewHolder extends RecyclerView.ViewHolder {
+    class HeaderViewHolder extends RecyclerView.ViewHolder {
 
         public HeaderViewHolder(@NonNull @NotNull View View) {
             super(View);
@@ -118,10 +148,14 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
     }
 
     //HeaderViewHolder, FooterViewHolder 각각 만들어 준다.
-    static class FooterViewHolder extends RecyclerView.ViewHolder {
+    class FooterViewHolder extends RecyclerView.ViewHolder {
+        public Button buttonLoadMore;
 
         public FooterViewHolder(@NonNull @NotNull View View) {
             super(View);
+
+            buttonLoadMore = itemView.findViewById(R.id.item_pokemon__footer__buttonLoadMore);
+            buttonLoadMore.setOnClickListener(onclickLoadMore);
 
         }
     }
