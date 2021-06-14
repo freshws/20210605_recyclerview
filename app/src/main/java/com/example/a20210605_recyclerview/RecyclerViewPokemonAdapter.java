@@ -9,17 +9,18 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 
-//"<RecyclerViewPokemonAdapter.ViewHolder>"는 사용하려는 ViewHolder 기입
-public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerViewPokemonAdapter.ViewHolder> {
+//ItemView는 HeaderView, ItemView, FooterView로 총 3개가 되었기 때문에 커스텀 ViewHolder는 사용하지 못하고 일반적인 RecyclerView Holder를 사용해야함.
+//RecyclerView.ViewHolder 으로 변경함.
+public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private static final int TYPE_HEADER = 0;
+    private static final int TYPE_FOOTER = 2;
+    private static final int TYPE_ITEM = 1;
+
 
     private List<Pokemon> data;
 
@@ -29,43 +30,75 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
 
     }
 
+    //onCreateViewHolder 메소드는 ViewHolder는 만들어주는 메소드
     @NonNull
     @NotNull
     @Override
-    public RecyclerViewPokemonAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pokemon, parent, false);
+        //언제 TYPE_HEADER, TYPE_ITEM, TYPE_FOOTER 가 적용되는 지는 안드로이드에서 알아서 실행해줌 (신경쓸필요 없음)
+        if (viewType == TYPE_HEADER) {
 
-        return new RecyclerViewPokemonAdapter.ViewHolder(view);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pokemon_header, parent, false);
+
+            return new HeaderViewHolder(view);
+
+        } else if (viewType == TYPE_FOOTER) {
+
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pokemon_footer, parent, false);
+
+            return new FooterViewHolder(view);
+
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_pokemon, parent, false);
+
+            return new ItemViewHolder(view);
+
+        }
+
     }
 
+
     @Override
-    public void onBindViewHolder(@NonNull @NotNull RecyclerViewPokemonAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
+        if (holder instanceof HeaderViewHolder) {
 
-        Pokemon pokemon = data.get(position);
+        } else if (holder instanceof FooterViewHolder) {
 
-        //아래의 setText의 매개변수는 String 타입이 들어가야 하므로 만약 toString을 해주지 않으면 타입 불일치로 Exception 발생
-        holder.textViewId.setText(pokemon.getId() + "번");
-        holder.textViewName.setText(pokemon.getName());
-        holder.textViewId.setTag(position);
+        } else {
 
-        Util.loadImageOn(pokemon.getImgUrl(), holder.imageViewPokemon);
+            //ViewHolder 클래스 이름을 ItemViewHolder라고 변경 했기 때문에...
+            ItemViewHolder itemViewHolder = (ItemViewHolder) holder;
 
+            //Header가 생기면서 data의 위치가 한칸씩 밀림
+            int pokemonIndex = position - 1;
+
+            //아래의 setText의 매개변수는 String 타입이 들어가야 하므로 만약 toString을 해주지 않으면 타입 불일치로 Exception 발생
+            Pokemon pokemon = data.get(pokemonIndex);
+            itemViewHolder.textViewId.setText(pokemon.getId() + "번");
+            itemViewHolder.textViewId.setTag(pokemonIndex);
+
+            itemViewHolder.textViewName.setText(pokemon.getName());
+            itemViewHolder.textViewName.setTag(pokemonIndex);
+
+            Util.loadImageOn(pokemon.getImgUrl(), itemViewHolder.imageViewPokemon);
+        }
     }
 
     @Override
     public int getItemCount() {
 
-        return data.size();
+        //Header, Footer도 각각 View를 하나씩 차지한다 그래서 +2 해줘야함.
+        return data.size() + 2;
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         public TextView textViewId;
         public TextView textViewName;
         public ImageView imageViewPokemon;
 
-        public ViewHolder(@NonNull @NotNull View itemView) {
+        public ItemViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
 
             textViewId = itemView.findViewById(R.id.item_pokemon__textViewId);
@@ -73,6 +106,48 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
             imageViewPokemon = itemView.findViewById(R.id.item_pokemon__imageViewPokemon);
 
         }
+    }
+
+    //HeaderViewHolder, FooterViewHolder 각각 만들어 준다.
+    static class HeaderViewHolder extends RecyclerView.ViewHolder {
+
+        public HeaderViewHolder(@NonNull @NotNull View View) {
+            super(View);
+
+        }
+    }
+
+    //HeaderViewHolder, FooterViewHolder 각각 만들어 준다.
+    static class FooterViewHolder extends RecyclerView.ViewHolder {
+
+        public FooterViewHolder(@NonNull @NotNull View View) {
+            super(View);
+
+        }
+    }
+
+
+    //getItemViewType는 position이 몇번 데이터인지 알려주는 메소드
+    @Override
+    public int getItemViewType(int position) {
+
+        //data의 갯수가 20가 있다 했을 때, data의 범위는 0 ~ 19
+        //그런데 Header가 생기면서 데이터의 범위는 1 ~ 20으로 변경됨
+
+        if (position == 0) {
+
+            return TYPE_HEADER;
+
+        } else if (position == data.size() + 1) {
+
+            return TYPE_FOOTER;
+
+        } else {
+
+            return TYPE_ITEM;
+
+        }
+
     }
 
 }
