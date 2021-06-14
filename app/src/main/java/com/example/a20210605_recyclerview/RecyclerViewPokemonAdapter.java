@@ -33,11 +33,6 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
 
     }
 
-    public RecyclerViewPokemonAdapter(List<Pokemon> data) {
-
-        this.data = data;
-
-    }
 
     //onCreateViewHolder 메소드는 ViewHolder는 만들어주는 메소드
     @NonNull
@@ -111,8 +106,18 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
 
         }
 
-        //데이터가 갱신됐다고 자동으로 refresh 되지 않기 때문에 notifyDataSetChanged(); 메소드 사용
-        notifyDataSetChanged();
+        /**
+         //데이터가 갱신됐다고 자동으로 refresh 되지 않기 때문에 notifyDataSetChanged(); 메소드 사용
+         //버튼을 눌렀을 때 데이터를 가져온 것 자체를 자동으로 해주지 않음
+         notifyDataSetChanged();
+         **/
+
+        //notifyDataSetChanged();와 다르게 아이템이 추가 되었고 어디에 추가 되어는지까지 정해주는 것
+        //1번 위치에 20개의 아이템이 들어간다는 것 (Header가 1번 위치...)(getLoadCount() 메소스 사용전 20 이었음)
+        //getLoadCount() 의 리턴 값은 정수형이고 몇개의 아이템이 들어가지 결정 된다.
+
+        int headerCount = 1;
+        notifyItemRangeInserted(headerCount + getLoadCount(), getLoadCount());
 
     }
 
@@ -120,6 +125,17 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
 
         this.onclickLoadMore = onclickLoadMore;
 
+    }
+
+
+    public int getLoadCount() {
+        return 5;
+    }
+
+    //현재 코드에서 data의 사이즈는 계속 바뀐다.
+    //가져온 데이터의 양이 늘어 날 수도록 데이터의 사이즈도 바뀌는 것
+    public int getDataSize() {
+        return data.size();
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder {

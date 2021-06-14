@@ -52,8 +52,8 @@ public class PokemonService {
 
     }
 
-    public void getPokemons( @NonNull Consumer<? super PokeApi__getPokemons__ResponseBody> onNext) {
-        pokeApi.getPokemons()
+    public void getPokemons(int offset, int limit, @NonNull Consumer<? super PokeApi__getPokemons__ResponseBody> onNext) {
+        pokeApi.getPokemons(offset, limit)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(onNext, throwable -> {
