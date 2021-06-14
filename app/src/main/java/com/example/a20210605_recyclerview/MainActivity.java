@@ -35,12 +35,10 @@ public class MainActivity extends AppCompatActivity {
         //PokeApi__getPokemons__ResponseBody가 API 내용을 받을 수 있게 변수명을 동일하게 만들어져있다.
         pokemonService.getPokemons(responseBody -> {
 
-
+            //★responseBody의 객체를 생성하지 않았는데 responseBody.getResults() 메소드를 호출하는 원리를 모르겠음
             recyclerViewPokemon.setAdapter(new RecyclerViewPokemonAdapter(responseBody.getResults()));
 
         });
-
-
 
 
     }
