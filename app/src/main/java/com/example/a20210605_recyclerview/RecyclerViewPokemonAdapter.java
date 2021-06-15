@@ -136,6 +136,11 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
 
     }
 
+    public Pokemon getPokemon(int index) {
+
+        return data.get(index);
+    }
+
 
     public int getLoadCount() {
         return 5;
@@ -146,8 +151,6 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
     public int getDataSize() {
         return data.size();
     }
-
-
 
     class ItemViewHolder extends RecyclerView.ViewHolder {
 

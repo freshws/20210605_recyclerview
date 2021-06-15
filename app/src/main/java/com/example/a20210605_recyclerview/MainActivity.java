@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setTitle("포켓몬 리스트");
 
         final RecyclerView recyclerViewPokemon = findViewById(R.id.activity_main__recyclerViewPokemon);
 
@@ -32,7 +33,10 @@ public class MainActivity extends AppCompatActivity {
 
             int pokemonIndex = (int) v.getTag();
 
-            startActivity(new Intent(this, DetailActivity.class));
+            Intent intent = new Intent(this, DetailActivity.class);
+            Pokemon pokemon = recyclerViewPokemonAdapter.getPokemon(pokemonIndex);
+            intent.putExtra("id", pokemon.getId());
+            startActivity(intent);
 
         });
 
