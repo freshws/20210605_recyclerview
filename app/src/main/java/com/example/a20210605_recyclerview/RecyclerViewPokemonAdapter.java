@@ -26,6 +26,7 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
 
     private List<Pokemon> data;
     private View.OnClickListener onclickLoadMore;
+    private View.OnClickListener onclickItem;
 
     public RecyclerViewPokemonAdapter() {
 
@@ -87,6 +88,8 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
             itemViewHolder.textViewName.setText(pokemon.getName());
             itemViewHolder.textViewName.setTag(pokemonIndex);
 
+            itemViewHolder.imageViewPokemon.setTag(pokemonIndex);
+
             Util.loadImageOn(pokemon.getImgUrl(), itemViewHolder.imageViewPokemon);
         }
     }
@@ -121,6 +124,12 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
 
     }
 
+    public void setOnclickItem(View.OnClickListener onclickItem) {
+
+        this.onclickItem = onclickItem;
+
+    }
+
     public void setOnclickLoadMore(View.OnClickListener onclickLoadMore) {
 
         this.onclickLoadMore = onclickLoadMore;
@@ -138,6 +147,8 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
         return data.size();
     }
 
+
+
     class ItemViewHolder extends RecyclerView.ViewHolder {
 
         public TextView textViewId;
@@ -150,6 +161,10 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
             textViewId = itemView.findViewById(R.id.item_pokemon__textViewId);
             textViewName = itemView.findViewById(R.id.item_pokemon__textViewName);
             imageViewPokemon = itemView.findViewById(R.id.item_pokemon__imageViewPokemon);
+
+            textViewId.setOnClickListener(onclickItem);
+            textViewName.setOnClickListener(onclickItem);
+            imageViewPokemon.setOnClickListener(onclickItem);
 
         }
     }
