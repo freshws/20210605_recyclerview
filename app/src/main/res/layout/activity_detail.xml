@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.DetailActivity">
 
-    <TextView
-        android:id="@+id/activity_detail__textViewId"
-        android:layout_width="wrap_content"
+<!-- 데이터 바인딩을 하기위한 xml에 <layout></layout>으로 감사 줘야한다. -->
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10sp"
-        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
-        android:textStyle="bold" />
+        tools:context=".ui.DetailActivity">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/activity_detail__textViewId"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:padding="10sp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</layout>

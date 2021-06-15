@@ -6,6 +6,11 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    //데이터 바인딩 사용을 위해 추가
+    dataBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.example.a20210605_recyclerview"
         minSdkVersion 16

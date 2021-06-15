@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             //처음에는 가져온 데이터가 없으니 recyclerViewPokemonAdapter.getDataSize() 가 0 이지만 두번째 더 보기를 누룬 후엔
             //recyclerViewPokemonAdapter.getDataSize() 에 의해서 가져온 것 만큼 뒤의 데이터가 와야 한다.
             //결극 recyclerViewPokemonAdapter.getDataSize(), recyclerViewPokemonAdapter.getDataSize() 메소드는 getPokemons 메소드의 매개변수 이다.
-            pokemonService.getPokemons(recyclerViewPokemonAdapter.getDataSize(), recyclerViewPokemonAdapter.getDataSize(), responseBody -> {
+            pokemonService.getPokemons(recyclerViewPokemonAdapter.getDataSize(), recyclerViewPokemonAdapter.getLoadCount(), responseBody -> {
 
                 recyclerViewPokemonAdapter.addPokemons(responseBody.getResults());
                 //버튼이 눌려지도록 활성화
