@@ -31,8 +31,14 @@ public class DetailActivity extends AppCompatActivity {
         //데이터 바인딩을 했기 때문에 findViewById(R.id.activity_detail__textViewId);로 연결하지 않다도됨.\
         //xml내부에 여러 id가 있었다면 복잡해졌을 코드를 간단하게 해줌
         //activityDetailTextViewId은 xml 파일의 id 이다.
-        binding.activityDetailTextViewId.setText(id + " 번");
 
+        /**
+         * 아래는 binding 사용시 id로 접근 하는 경우
+        binding.activityDetailTextViewId.setText(id + " 번");
+         **/
+
+        //아래는 binding 사용시 변수명으로 접근하는 경우
+        binding.setId(id);
 
         /**
         //activity 화면에 XML 말고 자바 코딩으로 글자가 나오도록 하는 것
@@ -49,9 +55,21 @@ public class DetailActivity extends AppCompatActivity {
 
             Pokemon pokemon = responseBody.getPokemon();
 
+            /**
+             * 아래는 binding 사용시 id로 접근 하는 경우
             binding.activityDetailTextViewName.setText(pokemon.getName());
+             **/
 
+            //아래는 binding 사용시 변수명으로 접근하는 경우
+            binding.setName(pokemon.getName());
+
+            /**
+             * 아래는 binding 사용시 id로 접근 하는 경우
             Util.loadImageOn(pokemon.getImgUrl(), binding.activityDetailImageViewPokemon);
+            **/
+
+            //아래는 binding 사용시 변수명으로 접근하는 경우
+            binding.setImgUrl(pokemon.getImgUrl());
 
             //Toast.makeText(this,responseBody.getName(),Toast.LENGTH_SHORT).show();
 
