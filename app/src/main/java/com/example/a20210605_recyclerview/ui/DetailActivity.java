@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.example.a20210605_recyclerview.Pokemon;
 import com.example.a20210605_recyclerview.R;
+import com.example.a20210605_recyclerview.Util;
 import com.example.a20210605_recyclerview.databinding.ActivityDetailBinding;
 import com.example.a20210605_recyclerview.service.PokemonService;
 
@@ -40,14 +41,17 @@ public class DetailActivity extends AppCompatActivity {
          **/
 
         //MainActivity에서 아이템(recyclerViewPokemonAdapter.setOnclickItem)을 클릭하면 DetailActivity로 전환됨
-        //그렇기 때문에 아이템을 클릭했을 때 토스트 메세지가 뜨게 하려면 DetailActivity에서 호출해야됨
+        //그렇기 때문에 아이템을 클릭했을 때 토스트 메세지가 뜨게 하려면 DetailActivity에서 호출해야됨 (주석처리됨)
         final PokemonService pokemonService = new PokemonService();
 
+        //아이템 클릭하면 이름과 이미지가 뜨도록 함.
         pokemonService.getPokemon(id,responseBody -> {
 
             Pokemon pokemon = responseBody.getPokemon();
 
             binding.activityDetailTextViewName.setText(pokemon.getName());
+
+            Util.loadImageOn(pokemon.getImgUrl(), binding.activityDetailImageViewPokemon);
 
             //Toast.makeText(this,responseBody.getName(),Toast.LENGTH_SHORT).show();
 
