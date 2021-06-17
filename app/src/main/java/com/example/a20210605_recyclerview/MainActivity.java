@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
         //"더 보기" 버튼이 클릭 되었을 때 통신이 발생하고 리스트가 뿌려지도록 변경
         //아래 람다식의 v는 버튼이다.
         recyclerViewPokemonAdapter.setOnclickLoadMore(v -> {

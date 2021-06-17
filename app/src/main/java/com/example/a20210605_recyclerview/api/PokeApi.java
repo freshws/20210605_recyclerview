@@ -6,6 +6,7 @@ import java.util.List;
 
 import io.reactivex.rxjava3.core.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface PokeApi {
@@ -20,5 +21,8 @@ public interface PokeApi {
     //https://pokeapi.co/api/v2/pokemon/?offset=(입력한 값)&limit=(입력한 값)
     //https://pokeapi.co/api/v2/pokemon/?offset=0&limit=5
     //예로 offset = 1, limit = 5 는 1번 데이터 건너뛰고 이후 5개 데이터를 가져오라는 것, 즉 2 ~ 6번 데이터를 가져온다.
+
+    @GET("pokemon/{id}")
+    Observable<PokeApi__getPokemon__ResponseBody> getPokemon(@Path("id") int id);
 
 }

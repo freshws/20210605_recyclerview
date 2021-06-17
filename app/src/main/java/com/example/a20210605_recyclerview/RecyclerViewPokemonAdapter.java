@@ -143,7 +143,7 @@ public class RecyclerViewPokemonAdapter extends RecyclerView.Adapter<RecyclerVie
 
 
     public int getLoadCount() {
-        return 1;
+        return 10;
     }
 
     //현재 코드에서 data의 사이즈는 계속 바뀐다.

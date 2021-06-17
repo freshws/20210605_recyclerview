@@ -4,9 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.a20210605_recyclerview.Pokemon;
 import com.example.a20210605_recyclerview.R;
 import com.example.a20210605_recyclerview.databinding.ActivityDetailBinding;
+import com.example.a20210605_recyclerview.service.PokemonService;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -29,11 +32,26 @@ public class DetailActivity extends AppCompatActivity {
         //activityDetailTextViewId은 xml 파일의 id 이다.
         binding.activityDetailTextViewId.setText(id + " 번");
 
+
         /**
         //activity 화면에 XML 말고 자바 코딩으로 글자가 나오도록 하는 것
         TextView textView = findViewById(R.id.activity_detail__textViewId);
         textView.setText(id + " 번");
          **/
+
+        //MainActivity에서 아이템(recyclerViewPokemonAdapter.setOnclickItem)을 클릭하면 DetailActivity로 전환됨
+        //그렇기 때문에 아이템을 클릭했을 때 토스트 메세지가 뜨게 하려면 DetailActivity에서 호출해야됨
+        final PokemonService pokemonService = new PokemonService();
+
+        pokemonService.getPokemon(id,responseBody -> {
+
+            Pokemon pokemon = responseBody.getPokemon();
+
+            binding.activityDetailTextViewName.setText(pokemon.getName());
+
+            //Toast.makeText(this,responseBody.getName(),Toast.LENGTH_SHORT).show();
+
+        } );
 
     }
 }

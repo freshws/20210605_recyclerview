@@ -7,12 +7,21 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".ui.DetailActivity">
 
         <TextView
             android:id="@+id/activity_detail__textViewId"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10sp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/activity_detail__textViewName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:padding="10sp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
             android:textStyle="bold" />

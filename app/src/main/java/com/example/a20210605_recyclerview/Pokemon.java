@@ -18,6 +18,12 @@ public class Pokemon {
     private String name;
     private String url;
 
+    public Pokemon(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+
     public String getImgUrl() {
 
         return "https://pokeres.bastionbot.org/images/pokemon/" + id + ".png";

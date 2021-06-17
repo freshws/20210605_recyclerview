@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import com.example.a20210605_recyclerview.BuildConfig;
 import com.example.a20210605_recyclerview.Util;
 import com.example.a20210605_recyclerview.api.PokeApi;
+import com.example.a20210605_recyclerview.api.PokeApi__getPokemon__ResponseBody;
 import com.example.a20210605_recyclerview.api.PokeApi__getPokemons__ResponseBody;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
@@ -61,6 +62,17 @@ public class PokemonService {
                 });
     }
 
+    public void getPokemon(int id, @NonNull Consumer<? super PokeApi__getPokemon__ResponseBody> onNext) {
+        pokeApi.getPokemon(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(onNext, throwable -> {
+                    Util.log("throwable : " + throwable.getMessage());
+                });
+
+
+
+    }
 }
 
 
