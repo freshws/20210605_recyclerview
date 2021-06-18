@@ -37,8 +37,10 @@ public class DetailActivity extends AppCompatActivity {
         binding.activityDetailTextViewId.setText(id + " 번");
          **/
 
-        //아래는 binding 사용시 변수명으로 접근하는 경우
+        /** 아래는 binding 사용시 변수명으로 접근하는 경우
         binding.setId(id);
+        **/
+
 
         /**
         //activity 화면에 XML 말고 자바 코딩으로 글자가 나오도록 하는 것
@@ -53,23 +55,28 @@ public class DetailActivity extends AppCompatActivity {
         //아이템 클릭하면 이름과 이미지가 뜨도록 함.
         pokemonService.getPokemon(id,responseBody -> {
 
-            Pokemon pokemon = responseBody.getPokemon();
+            //아래는 binding으로 클래스 변수를 사용한 경우
+            binding.setPokemon(responseBody.getPokemon());
 
             /**
              * 아래는 binding 사용시 id로 접근 하는 경우
             binding.activityDetailTextViewName.setText(pokemon.getName());
              **/
 
-            //아래는 binding 사용시 변수명으로 접근하는 경우
+            /** 아래는 binding 사용시 변수명으로 접근하는 경우
             binding.setName(pokemon.getName());
+            **/
+
 
             /**
              * 아래는 binding 사용시 id로 접근 하는 경우
             Util.loadImageOn(pokemon.getImgUrl(), binding.activityDetailImageViewPokemon);
             **/
 
-            //아래는 binding 사용시 변수명으로 접근하는 경우
+            /** 아래는 binding 사용시 변수명으로 접근하는 경우
             binding.setImgUrl(pokemon.getImgUrl());
+             **/
+
 
             //Toast.makeText(this,responseBody.getName(),Toast.LENGTH_SHORT).show();
 
