@@ -7,10 +7,16 @@
     <!-- 변수명으로 접근하기 때문에 View 마다 일일이 id를 부여할 필요가 없다. -->
     <data>
 
-        <import type="com.example.a20210605_recyclerview.Pokemon"/>
+
         <variable
-            name="pokemon"
-            type="Pokemon" />
+            name="bottomImgUrl"
+            type="String" />
+
+        <import type="com.example.a20210605_recyclerview.ui.DetailViewModel" />
+
+        <variable
+            name="vm"
+            type="DetailViewModel" />
 
 
     </data>
@@ -34,14 +40,14 @@
                 android:padding="10sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
                 android:textStyle="bold"
-                app:numberText="@{pokemon.id}" />
+                app:numberText="@{vm.pokemon.id}" />
 
             <!-- 데이터 바인딩을 사용하기 때문에 "@+id/~~" 대신 변수명으로 접근, 사용 가능  -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
-                android:text="@{pokemon.name}"
+                android:text="@{vm.pokemon.name}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
                 android:textStyle="bold" />
 
@@ -55,7 +61,7 @@
                     android:layout_width="0sp"
                     android:layout_height="0sp"
                     android:scaleType="centerCrop"
-                    app:imgUrl="@{pokemon.imgUrl}"
+                    app:imgUrl="@{vm.pokemon.imgUrl}"
                     app:layout_constraintDimensionRatio="H,1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +74,7 @@
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:layout_gravity="center"
-                app:imgUrl="@{`https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&amp;fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FvgdnN%2Fbtq09ypXFWH%2FLpb5S9NTKYIja33kWhTVe0%2Fimg.png`}" />
+                app:imgUrl="@{vm.bottomImgUrl}" />
 
         </LinearLayout>
 

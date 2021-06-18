@@ -28,6 +28,8 @@ public class DetailActivity extends AppCompatActivity {
 
         setTitle(id + "번 포켓몬 상세정보");
 
+        DetailViewModel detailViewModel = new DetailViewModel();
+
         //데이터 바인딩을 했기 때문에 findViewById(R.id.activity_detail__textViewId);로 연결하지 않다도됨.\
         //xml내부에 여러 id가 있었다면 복잡해졌을 코드를 간단하게 해줌
         //activityDetailTextViewId은 xml 파일의 id 이다.
@@ -55,8 +57,12 @@ public class DetailActivity extends AppCompatActivity {
         //아이템 클릭하면 이름과 이미지가 뜨도록 함.
         pokemonService.getPokemon(id,responseBody -> {
 
+            detailViewModel.pokemon = responseBody.getPokemon();
+
             //아래는 binding으로 클래스 변수를 사용한 경우
-            binding.setPokemon(responseBody.getPokemon());
+            //여러 변수를 하나로 묶었다. → ViewModel
+            //앞에 "set"이 자동으로 붙는다.
+            binding.setVm(detailViewModel);
 
             /**
              * 아래는 binding 사용시 id로 접근 하는 경우
@@ -81,6 +87,11 @@ public class DetailActivity extends AppCompatActivity {
             //Toast.makeText(this,responseBody.getName(),Toast.LENGTH_SHORT).show();
 
         } );
+        /** 하단 이미지 로드
+        binding.setBottomImgUrl("https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FHXzwE%2FbtqYAsr6PuA%2FcKVE91X75vPr8k6sFOQJNK%2Fimg.png");
+         **/
 
-    }
+        detailViewModel.bottomImgUrl = "https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FHXzwE%2FbtqYAsr6PuA%2FcKVE91X75vPr8k6sFOQJNK%2Fimg.png";
+
+         }
 }
