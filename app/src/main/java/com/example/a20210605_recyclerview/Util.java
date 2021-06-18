@@ -1,6 +1,7 @@
 package com.example.a20210605_recyclerview;
 
 import android.app.Application;
+import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+
+import java.util.concurrent.Delayed;
 
 public class Util {
 
@@ -55,4 +58,10 @@ public class Util {
 
     }
 
+    // 몇초 뒤에 실행시켜주는 쓰레드 구문
+    public static void setTimeout(Runnable r, int delay) {
+
+        new android.os.Handler(Looper.getMainLooper()).postDelayed(r, delay);
+
+    }
 }

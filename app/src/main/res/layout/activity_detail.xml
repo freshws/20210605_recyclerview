@@ -40,14 +40,14 @@
                 android:padding="10sp"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
                 android:textStyle="bold"
-                app:numberText="@{vm.pokemon.id}" />
+                app:numberText="@{vm.lvPokemon.id}" />
 
             <!-- 데이터 바인딩을 사용하기 때문에 "@+id/~~" 대신 변수명으로 접근, 사용 가능  -->
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10sp"
-                android:text="@{vm.pokemon.name}"
+                android:text="@{vm.lvPokemon.name}"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
                 android:textStyle="bold" />
 
@@ -61,7 +61,7 @@
                     android:layout_width="0sp"
                     android:layout_height="0sp"
                     android:scaleType="centerCrop"
-                    app:imgUrl="@{vm.pokemon.imgUrl}"
+                    app:imgUrl="@{vm.lvPokemon.imgUrl}"
                     app:layout_constraintDimensionRatio="H,1:1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:layout_gravity="center"
-                app:imgUrl="@{vm.bottomImgUrl}" />
+                app:imgUrl="@{vm.lvBottomImgUrl}" />
 
         </LinearLayout>
 
