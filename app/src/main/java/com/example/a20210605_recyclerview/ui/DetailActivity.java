@@ -12,7 +12,7 @@ import com.example.a20210605_recyclerview.Util;
 import com.example.a20210605_recyclerview.databinding.ActivityDetailBinding;
 import com.example.a20210605_recyclerview.service.PokemonService;
 
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

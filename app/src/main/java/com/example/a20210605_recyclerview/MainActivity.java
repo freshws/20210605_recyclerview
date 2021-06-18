@@ -8,9 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a20210605_recyclerview.service.PokemonService;
+import com.example.a20210605_recyclerview.ui.BaseActivity;
 import com.example.a20210605_recyclerview.ui.DetailActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private PokemonService pokemonService;
     private RecyclerViewPokemonAdapter recyclerViewPokemonAdapter;
@@ -37,7 +38,9 @@ public class MainActivity extends AppCompatActivity {
 
             int pokemonIndex = (int) v.getTag();
 
-            Intent intent = new Intent(this, DetailActivity.class);
+            //CurrentActivity를 가져오는 구문에 따라 더이상 "this"를 사용하지 않아도됨
+            //ViewModel를 사용할 때 this를 사용하는 것보다 유용하다고 함...(왜 그런지는 찾아봐야함...)
+            Intent intent = new Intent(Util.getCurrentActivity(), DetailActivity.class);
             Pokemon pokemon = recyclerViewPokemonAdapter.getPokemon(pokemonIndex);
             intent.putExtra("id", pokemon.getId());
             startActivity(intent);
