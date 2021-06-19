@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
 
-    //리사이클러 뷰 생성
+<layout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/activity_main__recyclerViewPokemon"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="100"
-        tools:listitem="@layout/item_pokemon" />
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
+        //리사이클러 뷰 생성
 
-</LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/activity_main__recyclerViewPokemon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="100"
+            tools:listitem="@layout/item_pokemon" />
+
+    </LinearLayout>
+</layout>

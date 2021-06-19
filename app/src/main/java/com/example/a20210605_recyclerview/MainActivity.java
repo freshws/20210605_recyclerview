@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a20210605_recyclerview.databinding.ActivityMainBinding;
 import com.example.a20210605_recyclerview.service.PokemonService;
 import com.example.a20210605_recyclerview.ui.BaseActivity;
 import com.example.a20210605_recyclerview.ui.DetailActivity;
@@ -19,19 +20,19 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        //MainActivity에도 databinding 적용
+        ActivityMainBinding binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         setTitle("포켓몬 리스트");
-
-        final RecyclerView recyclerViewPokemon = findViewById(R.id.activity_main__recyclerViewPokemon);
 
         pokemonService = new PokemonService();
 
         //데이터와 어뎁터가 연결되지 않은, 빈껍데이 리싸이클러 뷰 어댑터 생성
         recyclerViewPokemonAdapter = new RecyclerViewPokemonAdapter();
 
-        //메인 액티비티와 어댑터 연결
-        recyclerViewPokemon.setAdapter(recyclerViewPokemonAdapter);
+        //binding 사용으로 findById 메소드는 사용하지 않아도됨
+        binding.activityMainRecyclerViewPokemon.setAdapter(recyclerViewPokemonAdapter);
 
         //아이템을 클릭 했을 때 화면 전환이 발생하도록 함
         recyclerViewPokemonAdapter.setOnclickItem(v -> {
@@ -58,6 +59,8 @@ public class MainActivity extends BaseActivity {
 
             //"더 보기" 버튼을 클릭 했을 때 아이템 리스트가 나옴
             loadMore(v);
+
+
 
 
         });
